@@ -120,6 +120,10 @@ int main() {
     uint64_t decHigh = ModPow17(encHigh, CONST_MOD_HIGH);
 
     uint64_t seed = ((decHigh & 0xFFFFFFFF) << 32) | (decLow & 0xFFFFFFFF);
+    // seed = ~seed; 
+    // ^^ this is only needed when the call (decryption) has the "~" like here:
+    // v10 = EAC::BlaBlaBla(&v13, (void *)(__ROR8__(~v9, 0x19) ^ 0x8F6E1DFD5F7DF99DuLL));
+    
     uint64_t rotated = Ror64(seed, ROR_SHIFT);
     uint64_t decrypted_function = rotated ^ XOR_KEY;
 
