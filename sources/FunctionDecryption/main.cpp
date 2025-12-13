@@ -73,6 +73,7 @@ int main() {
         return 1;
     }
 
+    // edit: i have no idea why i did that in usermode but i guess it doesn't matter :)
     auto NtQuerySystemInformation = (NtQuerySystemInformation_t)GetProcAddress(GetModuleHandleA("ntdll.dll"), "NtQuerySystemInformation");
     if (!NtQuerySystemInformation) return 1;
 
