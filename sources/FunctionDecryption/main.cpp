@@ -2,14 +2,15 @@
 #include <iostream>
 #include "DriverCommunication.hpp"
 
-// offsets - these offsets are for "NtCreateFile" in the current version
-uint64_t OFFSET_PTR_STORAGE = 0x1BC1C0;
-uint64_t XOR_KEY = 0x482D3618EC494DD9LL;
-int      ROR_SHIFT = 0x37;
+// offsets - these offsets are for "NtCreateFile" in the current version (Fall Guys)
+// 48 89 5C 24 ?? 48 89 74 24 ?? 55 57 41 54 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 45 33 FF
+uint64_t OFFSET_PTR_STORAGE = 0x1C84E8;
+uint64_t XOR_KEY = 0xB0DC8D6ABFE9C383uLL;
+int      ROR_SHIFT = 0x23;
 
 // these only need to be updated if EAC updates
-uint64_t CONST_GLOBAL_MOD = 0x21C710;
-uint64_t CONST_MOD_HIGH = 0x3CFE946D0E086C3F;
+uint64_t CONST_GLOBAL_MOD = 0x20F798;
+uint64_t CONST_MOD_HIGH = 0x226183A9357255B3LL;
 
 typedef struct _SYSTEM_MODULE_ENTRY {
     HANDLE Section;
@@ -51,7 +52,7 @@ unsigned __int64 MulMod(unsigned __int64 a, unsigned __int64 b, unsigned __int64
 unsigned __int64 ModPow17(unsigned __int64 base, unsigned __int64 mod) {
     unsigned __int64 result = 1;
     unsigned __int64 b = base;
-    unsigned __int64 exponent = 0x11; // lets pray this doesnt change
+    unsigned __int64 exponent = 0x3; // lets pray this doesnt change
 
     while (exponent > 0) {
         if (exponent & 1) result = MulMod(result, b, mod);
